@@ -4,5 +4,5 @@
 * BUSINESS	STATEMENT	DUE:	Oct.	19,	Friday,	17:00	
 
 ## To Do
-* All CV's will added under CV folder.
+* All CV's will added under CV folder in the business statement report.
 * Weekly report will added under Weekly Reports folder.
