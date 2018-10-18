@@ -6,3 +6,8 @@
 ## To Do
 * All CV's will added under CV folder in the business statement report.
 * Weekly report will added under Weekly Reports folder.
+## Not To Do (Important!)
+* Not push before pull! (alan el veren elden üstündür.)
+* Never ever try to open another branch
+* No fetch, merge, weird forks and anything fancy
+* If your push give error do **NOT** force-push. There is no **force-pull** option at the another side. 
