@@ -1,7 +1,7 @@
 # 15-22 October 2018
 ## Deadlines
 * Weekly Reports every monday nights 00:00
-* BUSINESS	STATEMENT	DUE:	Oct.	19,	Friday,	17:00	
+* PROPOSAL REPORT	DUE:	Nov.	9,	Friday,	17:00	
 
 ## To Do
 * Weekly report will added under Weekly Reports folder.
