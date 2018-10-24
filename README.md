@@ -1,3 +1,9 @@
+# 22-29 October 2018
+## Deadlines
+* Weekly Reports every monday nights 00:00
+## To Do
+* We should evaluate metrics **immediately**
+
 # 15-22 October 2018
 ## Deadlines
 * Weekly Reports every monday nights 00:00
