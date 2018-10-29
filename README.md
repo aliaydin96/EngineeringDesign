@@ -1,3 +1,7 @@
+# 29 October - 5 November 2018
+## Deadlines
+* Weekly Reports every monday nights 00:00
+
 # 22-29 October 2018
 ## Deadlines
 * Weekly Reports every monday nights 00:00
