@@ -1,20 +1,9 @@
 # 29 October - 5 November 2018
 ## Deadlines
 * Weekly Reports every monday nights 00:00
-
-# 22-29 October 2018
-## Deadlines
-* Weekly Reports every monday nights 00:00
-## To Do
-* We should evaluate metrics **immediately**
-
-# 15-22 October 2018
-## Deadlines
-* Weekly Reports every monday nights 00:00
 * PROPOSAL REPORT	DUE:	Nov.	9,	Friday,	17:00	
 
-## To Do
-* Weekly report will added under Weekly Reports folder.
+
 ## Not To Do (Important!)
 * Not push before pull! (alan el veren elden üstündür.)
 * Never ever try to open another branch
