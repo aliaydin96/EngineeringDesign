@@ -1,7 +1,11 @@
-# 29 October - 5 November 2018
+
 ## Deadlines
 * Weekly Reports every monday nights 00:00
-* PROPOSAL REPORT	DUE:	Nov.	9,	Friday,	17:00	
+* STANDARDS REPORT	DUE:	Dec.	7,	Friday,	17:00	
+* MODULE TEST DEMO  DUE:  Dec.  17-21
+* CONCEPTUAL DESIGN REPORT DUE: Dec 26, Wednesday, 17:00
+* PRESENTATIONS: Dec 27-28, Thursday-Friday
+* PRESENTATIONS: Jan 2-4, Wednesday, Thursday, Friday
 
 
 ## Not To Do (Important!)
