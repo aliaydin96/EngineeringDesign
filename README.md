@@ -8,7 +8,8 @@
 * PRESENTATIONS: Jan 2-4, Wednesday, Thursday, Friday
 
 
-## Not To Do (Important!)
+## Not To Do (Important!) 
+* Öncelikle dosyasınızı başka bir konumda düzenleyin. Pull yapın sonra düzenlediğiniz dosyayı EngineeringDesign klasörüne atıp push yapın.
 * Not push before pull! (alan el veren elden üstündür.)
 * Never ever try to open another branch
 * No fetch, merge, weird forks and anything fancy
