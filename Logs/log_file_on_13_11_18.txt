@@ -1,0 +1,7 @@
+//this file contains general feedbacks on the proposal report
+-In the title page there is no indication about the positions of the team members.
+-In executive summamry, the introduction is redundant. It exceeds one page limit for the executive summary and it is not well defined.
+-In introduction, there is no mention of the next topics. It lacks of even task distribution. For example, Enes has no task different from management.
+-In main body, there is no mention of objectives, requirements and funtional requirements. This part is the problamatic part. We need to review the lecture notes on Fundamental of Design.
+-We have totally misunderstood the report.
+-In the DS meeting, homework for standard comitee is mentioned(Is it irrelevant?).
