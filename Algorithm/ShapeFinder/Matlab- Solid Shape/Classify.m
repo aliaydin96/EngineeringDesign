@@ -14,6 +14,7 @@
 function W = Classify(ImageFile)
 % Step 1: Read image Read in
 RGB = imread(ImageFile);
+RGB = imresize(RGB,0.3);
 figure,
 imshow(RGB),
 title('Original Image');
@@ -31,6 +32,7 @@ BW = im2bw(GRAY, threshold);
 figure,
 imshow(BW),
 title('Binary Image');
+
 
 % Step 4: Invert the Binary Image
 BW = ~ BW;
