@@ -1,0 +1,20 @@
+Read it carefully
+The way that measurements are taken is notes in the chapter Measurements Notes.
+The measuremnts have 1mm^2 resolution and eash pixel has 1mm edge length.
+The obejects and the boundaries are visualized by manupulating and reorienting the measured objects' edges corners and surfaces.
+You may want to recreate a plane using the measurement files named "measurement.mat.file"
+
+
+			      Objects and Boundaries
+*Boundary consists of 12 plates of 500mm long.
+*Cylinders of 10 cm diameter.
+*Cylinders of 5 cm diameter.
+*Square prisms with 7 cm edge length.
+*Prisms with an equilateral triangular base of 8 cm edge length.
+
+				Mesurement Notes
+*The measurements are taken 200mm away from the outward boundary.
+*Four measurements are taken 90 degree apart for the cylinders.
+*For sharp objects, the masurements are taken for its edges and corners.
+*The boundary measurements are taken normal to 500mm away.
+
