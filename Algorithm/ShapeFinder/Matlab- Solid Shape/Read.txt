@@ -1,1 +1,1 @@
-Ýt finds solid shapes. Pre-processing is embedded in codes. Matlab
+It finds solid shapes. Pre-processing is embedded in codes. Matlab
