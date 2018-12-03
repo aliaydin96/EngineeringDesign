@@ -1,0 +1,1 @@
+the test plans are created within the scaling error of 50%. The pixel size is prefencially chosen to be 2.5mm. 
