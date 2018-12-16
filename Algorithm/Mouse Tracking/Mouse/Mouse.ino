@@ -10,7 +10,7 @@ PS2 mouse_1(5, 6);
 PS2 mouse_2(7, 8);
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   mouse_1.write(0xff);  // reset
   mouse_1.read();  // ack byte
   mouse_1.read();  // blank */
@@ -43,17 +43,15 @@ void loop()
 
     //Writing data to serial port
     
-    Serial.print("dX1=");
-    Serial.print(mx_1);
-    Serial.print(" dY1=");
-    Serial.print(my_1);
-    Serial.println();
-    Serial.print("dX2=");
-    Serial.print(mx_2);
-    Serial.print(" dY2=");
-    Serial.print(my_2);
-    Serial.println();
-    Serial.println();
+  
+    Serial.println(mx_1);
+    //delay(250);
+    Serial.println(my_1);
+    //delay(250);
+    Serial.println(mx_2);
+    //delay(250);
+    Serial.println(my_2);
+    //delay(250);
     i=0;
     }
 }
