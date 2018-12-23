@@ -1,4 +1,4 @@
-
+# Coni nolur yeni branch açma :*
 ## Deadlines
 * Weekly Reports every monday nights 00:00
 * STANDARDS REPORT	DUE:	Dec.	7,	Friday,	17:00	
