@@ -42,11 +42,13 @@ y2_pos = 0;
 % the previous mouse positions
 x_pos_initial = 0;
 y_pos_initial = 0;
-x2_pos_initial = 0;
-y2_pos_initial = 0;
+x1_pos_initial = 0;
+y1_pos_initial = 0;
 angle = 0; 
 anglesum = 90;
 s = 0;
+sumx = 0;
+sumy = 0;
 for index = 1:intended_data_size
     % take data from serial port
     % this dx means it is instantenous data
@@ -55,8 +57,8 @@ for index = 1:intended_data_size
     dx_2(1,index) = (fscanf(comPort,'%d')) / 7.35;
     dy_2(1,index) = (fscanf(comPort,'%d')) / 7.35; 
 %     % to obtain xy position of mouse
-%     x1_pos = x1_pos_initial + dx_1(1, index);
-%     y1_pos = y1_pos_initial + dy_1(1, index);
+    x1_pos = x1_pos_initial + dx_1(1, index);
+    y1_pos = y1_pos_initial + dy_1(1, index);
 %     x2_pos = x2_pos_initial + dx_2(1, index);
 %     y2_pos = y2_pos_initial + dy_2(1, index);
     
@@ -66,12 +68,12 @@ for index = 1:intended_data_size
      
      if( (dy_1(1,index)>=0) & (dy_2(1,index)>=0)|| (dy_1(1,index)>=0) & (dy_2(1,index)<=0))%(dx_1(1,index)<=0) & (dx_2(1,index)<=0) &
             angle = anglesum - (l_1(1,index) - l_2(1,index)) / 1.1
-            x_pos = s * cos(angle * pi / 180) + x_pos_initial;
-            y_pos = s * sin(angle * pi / 180) + y_pos_initial;
+            x_pos = s * cos(anglesum * pi / 180) + x_pos_initial;
+            y_pos = s * sin(anglesum * pi / 180) + y_pos_initial;
      else
             angle = (l_1(1,index) - l_2(1,index)) / 1.1 + anglesum
-            x_pos = -s * cos(angle * pi / 180) + x_pos_initial;
-            y_pos = -s * sin(angle * pi / 180) + y_pos_initial;
+            x_pos = -s * cos(anglesum * pi / 180) + x_pos_initial;
+            y_pos = -s * sin(anglesum * pi / 180) + y_pos_initial;
      end
 
      anglesum = angle;
@@ -84,7 +86,8 @@ for index = 1:intended_data_size
     
     x_pos_initial = x_pos;
     y_pos_initial = y_pos;
-
+    x1_pos_initial = x1_pos;
+    y1_pos_initial = y1_pos;
 
 
 end
