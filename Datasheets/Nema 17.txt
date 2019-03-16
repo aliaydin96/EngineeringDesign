@@ -1,0 +1,28 @@
+This is the shortest bipolar Nema 17 stepper motor we have, it with step angle 1.8deg and size 42x42x20mm. It has 4 wires, each phase draws current 1.0A, with holding torque 13Ncm (18.4oz.in).
+
+Electrical Specification
+Manufacturer Part Number: 17HS08-1004S
+Motor Type: Bipolar Stepper
+Step Angle: 1.8 deg
+Holding Torque: 13Ncm(18.4oz.in)
+Rated Current/phase: 1.0A
+Voltage: 3.5V
+Phase Resistance: 3.5ohms
+Inductance: 4.5mH ± 20%(1KHz)
+Physical Specification
+Frame Size: 42 x 42mm
+Body Length: 20mm
+Shaft Diameter: ?5mm
+Shaft Length: 20mm
+D-cut Length: 16.5mm
+Number of Leads: 4
+Lead Length: 400mm
+Weight: 140g
+
+A+      Black
+A- 	Green
+B+	Red
+B-	Blue
+
+
+
