@@ -1,11 +1,10 @@
 # Coni nolur yeni branch açma :*
 ## Deadlines
 * Weekly Reports every monday nights 00:00
-* STANDARDS REPORT	DUE:	Dec.	7,	Friday,	17:00	
-* MODULE TEST DEMO  DUE:  Dec.  17-21
-* CONCEPTUAL DESIGN REPORT DUE: Dec 26, Wednesday, 17:00
-* PRESENTATIONS: Dec 27-28, Thursday-Friday
-* PRESENTATIONS: Jan 2-4, Wednesday, Thursday, Friday
+* IMPLEMENTATION DEADLINE April 22-26
+* FINAL REPORT IS DUE May 10th, Friday (17:00)
+* FINAL DEMO (May 13‐ 17 May)
+* EE494 - PROJECT FAIR June 14th
 
 
 ## Not To Do (Important!) 
