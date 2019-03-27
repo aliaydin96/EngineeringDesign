@@ -36,7 +36,7 @@ def scan2map(measurement, selfPosition = np.array([0,0,0])):
 
 def interPolation(PD):
     
-    t= np.linspace(1,2,num=4000, endpoint=True)
+    t= np.linspace(40,120,num=4000, endpoint=True)
     R_interpolated= np.interp(t,PD[1,:],PD[0,:])
     PDinter= np.zeros([2,R_interpolated.size])
     #print()
@@ -58,10 +58,11 @@ def data2map(coordinateMeas,selfLocalization):
     #for i in range (0,positionData.shape[1]):
         #polarData[:,i]= cart2pol(positionData[0,i],positionData[1,i])
     
-    #polar_Data= interPolation(polarData)
+    polar_Data= interPolation(positionData)
     #print (polar_Data.shape)
     #print (polarData.shape)
     #print(selfLocalizationData)
-    xy_data = scan2map(positionData,selfLocalizationData)
+    #xy_data = scan2map(positionData,selfLocalizationData)
+    xy_data = scan2map(polar_Data,selfLocalizationData)
     return xy_data
 
