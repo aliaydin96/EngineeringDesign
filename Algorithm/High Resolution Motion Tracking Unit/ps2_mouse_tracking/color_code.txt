@@ -1,0 +1,4 @@
+Green Ground
+Blue +5
+Orange Clock
+Yellow Data

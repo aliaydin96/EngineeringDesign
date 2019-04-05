@@ -32,3 +32,8 @@ plot(set_2(1,:),set_2(2,:),'b.');
 plot(set_3(1,:),set_3(2,:),'g.');
 plot(set_4(1,:),set_4(2,:),'black.');
 grid on;
+result = [set_1, set_2, set_3, set_4];
+x = result(1,:);
+y = result(2,:);
+xlim([0,300]);
+ylim([0,300]);
