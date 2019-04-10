@@ -9,15 +9,15 @@ rpmcount2 = 0
 rpmMotor1 = 0
 rpmMotor2 = 0
 #input definition
-GPIO.setup(16, GPIO.IN)  
-GPIO.setup(18, GPIO.IN)
-GPIO.setup(22, GPIO.IN)
-GPIO.setup(24, GPIO.IN)
+GPIO.setup(24, GPIO.IN)  
+GPIO.setup(26, GPIO.IN)
+GPIO.setup(29, GPIO.IN)
+GPIO.setup(31, GPIO.IN)
 
 def encoderDataMotor_1(A):
     global rpmcount
-    encoderA = GPIO.input(16)
-    encoderB = GPIO.input(18)
+    encoderA = GPIO.input(26)
+    encoderB = GPIO.input(24)
     if(encoderA == 1):
         if(encoderB == 1):
             rpmcount = rpmcount + 1
@@ -31,8 +31,8 @@ def encoderDataMotor_1(A):
             
 def encoderDataMotor_2(A):
     global rpmcount2
-    encoderA = GPIO.input(22)
-    encoderB = GPIO.input(24)
+    encoderA = GPIO.input(29)
+    encoderB = GPIO.input(31)
     if(encoderA == 1):
         if(encoderB == 1):
             rpmcount2 = rpmcount2 + 1
@@ -43,15 +43,14 @@ def encoderDataMotor_2(A):
             rpmcount2 = rpmcount2 - 1
         else:
             rpmcount2 = rpmcount2 + 1
-GPIO.add_event_detect(16, GPIO.RISING, callback = encoderDataMotor_1)
-GPIO.add_event_detect(22, GPIO.RISING, callback = encoderDataMotor_2)
+GPIO.add_event_detect(26, GPIO.RISING, callback = encoderDataMotor_1)
+GPIO.add_event_detect(29, GPIO.RISING, callback = encoderDataMotor_2)
 #GPIO.add_event_detect(18, GPIO.BOTH, callback = rpmmotor)
 try:
     while True:
-        rpmMotor1 = np.divide(rpmcount, 17.0)
-        print("rpm1:",rpmMotor1)
-        rpmMotor2 = np.divide(rpmcount2, 17.0)
-        print("rpm2:",rpmMotor2)
+        rpmMotor1 = rpmcount / 17.9
+        rpmMotor2 = rpmcount2 / 16.5
+        print("rpm1:",rpmMotor1,"rpm2:",rpmMotor2)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
