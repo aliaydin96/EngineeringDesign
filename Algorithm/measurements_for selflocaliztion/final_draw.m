@@ -1,0 +1,30 @@
+close all;
+th = (0:1:199)*2*pi/200;
+data0 = csvread('C:\Users\AcmeCo\Desktop\harita4\data0.csv');
+set0 = mdf((data0(1,:)+data0(2,:))/2);
+data1 = csvread('C:\Users\AcmeCo\Desktop\harita4\data1.csv');
+set1 = mdf((data1(1,:)+data1(2,:))/2);
+data2 = csvread('C:\Users\AcmeCo\Desktop\harita4\data2.csv');
+set2 = mdf((data2(1,:)+data2(2,:))/2);
+% data3 = csvread('C:\Users\AcmeCo\Desktop\harita4\data3.csv');
+% set3 = mdf((data3(1,:)+data3(2,:))/2);
+% data4 = csvread('C:\Users\AcmeCo\Desktop\harita4\data4.csv');
+% set4 = mdf((data4(1,:)+data4(2,:))/2);
+plot(set0.*cos(th), set0.*sin(th),'.r');
+hold on;
+angle1 = -96.7; x1 = 20; y1 = 110;
+angle2 = -109.66; x2 = 40.77; y2 = 124.9;
+% angle3 = -1.16; x3 = -4; y3 = 804;
+% angle4 = -82.17; x4 = 200.5; y4 = 890.56;
+plot(set1.*cos(th+angle1*pi/180)+x1, set1.*sin(th+angle1*pi/180)+y1,'.g');
+plot(set2.*cos(th+angle2*pi/180)+x2, set2.*sin(th+angle2*pi/180)+y2,'.b');
+% plot(set3.*cos(th+angle3*pi/180)+x3, ...
+%     set3.*sin(th+angle3*pi/180)+y3,'.c');
+% plot(set4.*cos(th+angle4*pi/180)+x4, ...
+%     set4.*sin(th+angle4*pi/180)+y4,'.y');
+legend('1', '2','3');
+xlabel('x axis, mm');
+ylabel('y axis, mm');
+title('The Input Map of the Test Environment for Moving Discard Filter');
+grid on;
+axis equal;
