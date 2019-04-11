@@ -3,17 +3,19 @@ import RPi.GPIO as GPIO
 import time
 import math 
 from motor import *
+import numpy as np
 GPIO.setwarnings(False)
-
-Kp = 0.7
+GPIO.setmode(GPIO.BOARD)
+Kp = 0.3
 Kd = 0.2
-desired_angle = 30
-desired_x_position = 500
-desired_y_position = 100
+Ki = 0.001
+desired_angle = 0
+desired_x_position = 0
+desired_y_position = 0
 baseSpeed = 4
 maxMotorSpeed = 8
 minMotorSpeed = 0
-constant_divider_forMouse = 34.0
+constant_divider_forMouse = 36.0
 ser = serial.Serial("/dev/ttyUSB0", 115200)
 headingArray = []
 x_pos_array = []
@@ -43,7 +45,7 @@ anglesum = 90
 x_position = 0
 y_position = 0
 middlePoint = 0
-x_position_initial = 0
+x_position_initial = -1
 y_position_initial = 0
 counter = 0
 counter1 = 0
@@ -52,16 +54,18 @@ last_angle_error = 0
 dutycycle_1_initial = 0
 dutycycle_2_initial = 0
 coordinate_angle = 0
+past_angle_errors = np.zeros(6)
 GPIO.setup(18, GPIO.IN)
 #in1, in2, PWM, Stanby, (polarity of motors)
 motor1 = Motor(40,36,32,38,True)
 motor2 = Motor(35,37,33,38,False)
-def PD_controller(desired_angle, angle):
+def PD_controller(PI_desired_angle, PI_angle):
     global counter
     global last_angle_error, angle_error
     global dutycycle_1_initial, dutycycle_2_initial
-    angle_error = desired_angle - angle
-    motor_speed = Kp * angle_error + Kd * (angle_error - last_angle_error)
+    angle_error = PI_desired_angle - PI_angle
+    past_angle_errors[5] =angle_error
+    motor_speed = Kp * angle_error + Ki * np.sum(past_angle_errors)#Kd * (angle_error - last_angle_error)
     last_angle_error = angle_error
     dutycycle_1 = baseSpeed - motor_speed
     dutycycle_2 = baseSpeed + motor_speed
@@ -86,20 +90,20 @@ def PD_controller(desired_angle, angle):
     motor2.drive(dutycycle_2)
     dutycycle_1_initial = dutycycle_1
     dutycycle_2_initial = dutycycle_2
-    
+    past_angle_errors[4] =  past_angle_errors[5]
+    past_angle_errors[3] =  past_angle_errors[4]
+    past_angle_errors[2] =  past_angle_errors[3]
+    past_angle_errors[1] =  past_angle_errors[2]
+    past_angle_errors[0] =  past_angle_errors[1]    
 
 def mouseInterrupt(A):
     global mx1,mx2,my1,my2
-    dx1 = int(ser.readline())
-    dy1 = -int(ser.readline())
-    dx2 = int(ser.readline())
-    dy2 = -int(ser.readline())
-    dx1 = dx1 * constant_divider_forMouse / 255 
-    dy1 = dy1 * constant_divider_forMouse / 255 
-    dx2 = dx2 * constant_divider_forMouse / 255 
-    dy2 = dy2 * constant_divider_forMouse / 255
-    dangle1 = 0.05
-    dangle2 = 0.05
+    dx1 = int(ser.readline()) * constant_divider_forMouse / 255
+    dy1 = -int(ser.readline()) * constant_divider_forMouse / 255
+    dx2 = int(ser.readline()) * constant_divider_forMouse / 255
+    dy2 = -int(ser.readline()) * constant_divider_forMouse / 255
+    dangle1 = 0.02
+    dangle2 = 0.02
     dx1 = dx1 * math.cos(dangle1) - dy1 * math.sin(dangle1)
     dy1 = dx1 * math.sin(dangle1) + dy1 * math.cos(dangle1)
     dx2 = dx2 * math.cos(dangle2) + dy2 * math.sin(dangle2)
@@ -115,7 +119,18 @@ time.sleep(5)
 try:        
     while True:
     #    time_begin = time.time()
-        
+        if((10 >= abs(x_position - desired_x_position)) & (10 >= abs(y_position - desired_y_position))):
+            motor1.brake() #Short brake
+            motor2.brake()
+            #GPIO.cleanup()
+            past_angle_errors[5] = 0
+            past_angle_errors[4] = 0
+            past_angle_errors[3] = 0
+            past_angle_errors[2] = 0
+            past_angle_errors[1] = 0 
+            past_angle_errors[0] = 0 
+            desired_x_position = int(input("xpos: "))
+            desired_y_position = int(input("ypos: "))
         length1 = math.sqrt(math.pow(mx1,2) + math.pow(my1,2))
         length2 = math.sqrt(math.pow(mx2,2) + math.pow(my2,2))
         x_avg = (mx1 + mx2) / 2
@@ -126,21 +141,21 @@ try:
         y_avg_change = y_avg - y_avg_initial
        
         if((x_avg >= 0)):
-            angle = (anglesum - (length1_change - length2_change) / 1.1) % 360
+            angle = (anglesum - (length1_change - length2_change) / 1.05) % 360
         else:
-            angle = (anglesum + (length1_change - length2_change) / 1.1) % 360
+            angle = (anglesum + (length1_change - length2_change) / 1.05) % 360
 
         x_position = x_avg_change * math.cos(anglesum * math.pi / 180) - y_avg_change * math.sin(anglesum * math.pi / 180) + x_position_initial
         y_position = x_avg_change * math.sin(anglesum * math.pi / 180) + y_avg_change * math.cos(anglesum * math.pi / 180) + y_position_initial
-#        print("dx1: ", dx1, "dy1: ", dy1, "dx2: ", dx2, "dy2: ",dy2)
+        print("dx1: ", mx1, "dy1: ", my1, "dx2: ", mx2, "dy2: ",my2)
 
-#        desired_angle = (math.atan2((desired_y_position - y_position) , (desired_x_position - x_position))) * 180 / math.pi
+        desired_angle = (math.atan2((desired_y_position - y_position) , (desired_x_position - x_position))) * 180 / math.pi
         if(angle > 240):
             angle = angle - 360
-#        if(desired_angle > 180):
-#            desired_angle -= 360
+        if(desired_angle > 240):
+            desired_angle -= 360
         PD_controller(desired_angle, angle)
-        print("angle ", angle, "x position ", x_position,"y position ", y_position)
+#        print("angle ", angle, "x position ", x_position,"y position ", y_position)
 
     #    motor1.drive(counter) #Backwards 100% dutycycle
     #    motor2.drive(counter)
@@ -157,29 +172,31 @@ try:
 #        headingArray.append(angle)
 #        x_pos_array.append(x_position)
 #        y_pos_array.append(y_position)
-        if((angle_error > -1) & (angle_error < 1)):
-            counter += 1
-        if(counter == 1000):    
-#        if((abs(x_position) >= abs(desired_x_position)) & (abs(y_position) >= abs(desired_y_position))):
-#        if(y_position >= 100):
-            desired_angle = 90
-            counter = 0
-            baseSpeed = -4
-            maxMotorSpeed = 0
-            minMotorSpeed = -8
-            counter1 += 1
-        if(counter1 == 2): 
- #       if((x_position >= 100) | (y_position >= 100)):
-            motor1.brake() #Short brake
-            motor2.brake()
-#            np.asarray(headingArray)
-#            np.asarray(x_pos_array)
-#            np.asarray(y_pos_array)
-#            np.savetxt("headingAngle.csv", headingArray, delimiter = ",")
-#            np.savetxt("x_position.csv", x_pos_array, delimiter = ",")
-#            np.savetxt("y_position.csv", y_pos_array, delimiter = ",")
-            GPIO.cleanup()
-            break
+#        if((angle_error > -1) & (angle_error < 1)):
+#            counter += 1
+#        if(counter == 3000):    
+#        if((10 >= abs(x_position - desired_x_position)) & (10 >= abs(y_position - desired_y_position))):
+##        if(y_position >= 100):
+##            desired_angle = 90
+##            counter = 0
+##            baseSpeed = -4
+##            maxMotorSpeed = 0
+##            minMotorSpeed = -8
+##            counter1 += 1
+##        if(counter1 == 2): 
+# #       if((x_position >= 100) | (y_position >= 100)):
+#            motor1.brake() #Short brake
+#            motor2.brake()
+##            np.asarray(headingArray)
+##            np.asarray(x_pos_array)
+##            np.asarray(y_pos_array)
+##            np.savetxt("headingAngle.csv", headingArray, delimiter = ",")
+##            np.savetxt("x_position.csv", x_pos_array, delimiter = ",")
+##            np.savetxt("y_position.csv", y_pos_array, delimiter = ",")
+#            GPIO.cleanup()
+#            desired_x_position = int(input("xpos: "))
+#            desired_y_position = int(input("ypos: "))
+#            break
         anglesum = angle
         x_position_initial = x_position
         y_position_initial = y_position
